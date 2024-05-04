@@ -32,12 +32,6 @@ export default function MultipleSelectChip({ multiple, label, options }) {
 									<Chip
 										key={value}
 										label={value}
-										onDelete={() => {
-											setSelectedNames(
-												selectedNames.filter((item) => item !== value)
-											);
-											handleChange(label);
-										}}
 										deleteIcon={
 											<CancelIcon
 												onMouseDown={(event) => event.stopPropagation()}

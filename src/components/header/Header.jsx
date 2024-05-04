@@ -4,7 +4,7 @@ import {
 	minBasePayOptions,
 	remoteOptions,
 	techStackOptions,
-} from "../../../mockData";
+} from "../../mockData";
 
 import MultipleSelectChip from "./MultipleSelectChip";
 
@@ -17,7 +17,6 @@ const Header = () => {
 				display: "flex",
 				flexWrap: "wrap",
 				justifyContent: "center",
-				margin: "15px",
 			}}
 		>
 			<MultipleSelectChip

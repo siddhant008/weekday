@@ -68,7 +68,31 @@ const Jobs = () => {
 	return (
 		<Box
 			ref={jobsRef}
-			sx={{ overflowY: "scroll", height: "77vh", margin: "8px" }}
+			sx={{
+				overflowY: "scroll",
+				height: "77vh",
+				margin: "8px",
+				/* width */
+				"&::-webkit-scrollbar": {
+					width: "10px",
+				},
+
+				/* Track */
+				"::-webkit-scrollbar-track": {
+					background: "#f1f1f1",
+					borderRadius: "25px",
+				},
+
+				/* Handle */
+				"::-webkit-scrollbar-thumb": {
+					borderRadius: "25px",
+					background: "#888",
+				},
+				/* Handle on hover */
+				"::-webkit-scrollbar-thumb:hover": {
+					background: "#555",
+				},
+			}}
 		>
 			{jobs.length ? (
 				<Grid container spacing={2} sx={{ flexGrow: 1 }}>

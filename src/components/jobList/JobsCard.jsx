@@ -15,7 +15,10 @@ export default function JobsCard({ item }) {
 	const [expanded, setExpanded] = React.useState(false);
 
 	return (
-		<Card elevation={3} sx={{ maxWidth: 345, borderRadius: "25px" }}>
+		<Card
+			elevation={3}
+			sx={{ maxWidth: 345, borderRadius: "25px", pl: "12px", pr: "12px" }}
+		>
 			<Box sx={{ mt: "16px", ml: "16px", textAlign: "left" }}>
 				<Chip
 					icon={<HourglassBottomIcon />}
@@ -76,10 +79,11 @@ export default function JobsCard({ item }) {
 								mt: "-24px",
 								zIndex: 99,
 								cursor: "pointer",
+								color: "#4b45db",
 							}}
 							onClick={() => setExpanded(true)}
 						>
-							Show More
+							View Job
 						</Typography>
 						{expanded && (
 							<AboutUsModal
@@ -116,7 +120,7 @@ export default function JobsCard({ item }) {
 					<Button
 						variant="contained"
 						sx={{
-							width: "90%",
+							width: "100%",
 							backgroundColor: "#54efc3",
 							color: "black",
 							height: "42px",
@@ -129,7 +133,7 @@ export default function JobsCard({ item }) {
 					<Button
 						variant="contained"
 						sx={{
-							width: "90%",
+							width: "100%",
 							backgroundColor: "#4943da",
 							height: "42px",
 							mb: "16px",

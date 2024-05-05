@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import JobsCard from "./JobsCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,11 +10,9 @@ const Jobs = () => {
 
 	const jobs = useSelector((state) => selectFilteredJdList(state));
 
-	// const [jobs, setJobs] = useState([]);
 	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const jobsRef = useRef(null);
-	const loaderRef = useRef(null);
 
 	const fetchJobs = async () => {
 		setLoading(true);
@@ -40,15 +38,13 @@ const Jobs = () => {
 
 	useEffect(() => {
 		loadInitialJobs();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const loadInitialJobs = async () => {
 		setLoading(true);
-		// Simulate fetching initial data
+		// fetching initial data
 		const initialJobs = await fetchJobs();
 		dispatch(setJobs(initialJobs.jdList));
-		// setJobs(initialJobs.jdList);
 		setLoading(false);
 	};
 
@@ -58,11 +54,10 @@ const Jobs = () => {
 
 			const { scrollTop, scrollHeight, clientHeight } = jobsRef.current;
 			if (scrollTop + clientHeight >= scrollHeight - 5) {
-				// Near the bottom
+				// when scroll is Near the bottom
 				setLoading(true);
 				const moreJobs = await fetchJobs(); // Fetch more jobs
 				dispatch(setJobs([...moreJobs.jdList]));
-				// setJobs((prevJobs) => [...prevJobs, ...moreJobs.jdList]);
 				setLoading(false);
 			}
 		};
@@ -75,7 +70,7 @@ const Jobs = () => {
 		return () => {
 			currentRef.removeEventListener("scroll", handleScroll);
 		};
-	}, [loading]); // Dependency on loading state
+	}, [loading]);
 
 	return (
 		<Box
@@ -119,7 +114,7 @@ const Jobs = () => {
 			) : (
 				!loading && <Typography variant="h5">No Data Available</Typography>
 			)}
-			<Box ref={loaderRef}>
+			<Box>
 				{loading && (
 					<Typography variant="h6" sx={{ m: "32px auto" }}>
 						Loading...

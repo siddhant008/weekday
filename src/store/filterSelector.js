@@ -1,4 +1,3 @@
-// filterSelectors.ts
 import { createSelector } from "reselect";
 
 const selectFilterState = (state) => state.filter;

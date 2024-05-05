@@ -1,5 +1,3 @@
-//@ts-ignore
-import React, { useState } from "react";
 import {
 	OutlinedInput,
 	InputLabel,

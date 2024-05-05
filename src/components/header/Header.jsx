@@ -112,7 +112,6 @@ const Header = () => {
 			>
 				Clear filter
 			</Button>
-			{/* </Box> */}
 		</Box>
 	);
 };

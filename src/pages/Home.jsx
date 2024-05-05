@@ -6,9 +6,7 @@ import Jobs from "../components/jobList/Jobs";
 export const Home = () => {
 	return (
 		<>
-			<Box>
-				<Header />
-			</Box>
+			<Header />
 			<Jobs />
 		</>
 	);

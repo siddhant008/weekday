@@ -1,14 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Box, Grid, Typography } from "@mui/material";
 import JobsCard from "./JobsCard";
+import { useDispatch, useSelector } from "react-redux";
+import { selectFilteredJdList } from "../../store/filterSelector";
+import { setJobs } from "../../store/jobsSlice";
 
 const Jobs = () => {
-	const [jobs, setJobs] = useState([]);
+	const dispatch = useDispatch();
+
+	const jobs = useSelector((state) => selectFilteredJdList(state));
+
+	// const [jobs, setJobs] = useState([]);
+	const [offset, setOffset] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const jobsRef = useRef(null);
 	const loaderRef = useRef(null);
 
-	const fetchJobs = async (offset) => {
+	const fetchJobs = async () => {
 		setLoading(true);
 		const body = JSON.stringify({
 			limit: 10,
@@ -26,18 +34,21 @@ const Jobs = () => {
 		if (!response.ok) {
 			throw new Error("Failed to fetch data");
 		}
+		setOffset((prevOffset) => prevOffset + 10);
 		return response.json();
 	};
 
 	useEffect(() => {
 		loadInitialJobs();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const loadInitialJobs = async () => {
 		setLoading(true);
 		// Simulate fetching initial data
 		const initialJobs = await fetchJobs();
-		setJobs(initialJobs.jdList);
+		dispatch(setJobs(initialJobs.jdList));
+		// setJobs(initialJobs.jdList);
 		setLoading(false);
 	};
 
@@ -50,7 +61,8 @@ const Jobs = () => {
 				// Near the bottom
 				setLoading(true);
 				const moreJobs = await fetchJobs(); // Fetch more jobs
-				setJobs((prevJobs) => [...prevJobs, ...moreJobs.jdList]);
+				dispatch(setJobs([...moreJobs.jdList]));
+				// setJobs((prevJobs) => [...prevJobs, ...moreJobs.jdList]);
 				setLoading(false);
 			}
 		};
@@ -105,7 +117,7 @@ const Jobs = () => {
 					))}
 				</Grid>
 			) : (
-				<Typography variant="h5">No Data Available</Typography>
+				!loading && <Typography variant="h5">No Data Available</Typography>
 			)}
 			<Box ref={loaderRef}>
 				{loading && (

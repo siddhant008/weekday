@@ -11,18 +11,22 @@ import {
 } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 
-export default function MultipleSelectChip({ multiple, label, options }) {
-	const [selectedNames, setSelectedNames] = useState([]);
-
+export default function MultipleSelectChip({
+	multiple,
+	label,
+	options,
+	onChange,
+	value,
+}) {
 	function handleChange(event) {
-		setSelectedNames(event?.target.value ?? []);
+		onChange(event);
 	}
 	return (
 		<FormControl sx={{ m: 1, width: "max-content", minWidth: "200px" }}>
 			<InputLabel>{label}</InputLabel>
 			<Select
 				multiple={multiple}
-				value={selectedNames}
+				value={value}
 				onChange={(e) => handleChange(e)}
 				input={<OutlinedInput label={label} />}
 				renderValue={(selected) => (

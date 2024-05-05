@@ -36,13 +36,7 @@ const filterSlice = createSlice({
 			state.minBasePay = action.payload;
 		},
 		clearFilter(state, action) {
-			state.minExperience = undefined;
-			state.companyName = undefined;
-			state.location = undefined;
-			state.remoteOnsite = [];
-			state.techStack = [];
-			state.role = undefined;
-			state.minBasePay = 0;
+			state = initialState;
 		},
 	},
 });
